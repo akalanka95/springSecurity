@@ -3,29 +3,16 @@ package com.epiclanka.supportTest.model;
 import javax.persistence.*;
 
 @Entity
-@Table( name = "companyUser")
-public class CompanyUser {
+@Table( name = "client")
+public class Client {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String userName;
     private String email;
-    private String Company;
     private String phone;
     private String mobile;
     private String password;
-    private String userRole;
-    //Supervisor
-
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
-            CascadeType.REFRESH})
-    @JoinColumn(name = "department_id")
-    private Department department;
-
-    @ManyToOne(cascade = {CascadeType.DETACH,CascadeType.MERGE,
-            CascadeType.REFRESH})
-    @JoinColumn(name = "team_id")
-    private Team team;
 
     public Long getId() {
         return id;
@@ -51,14 +38,6 @@ public class CompanyUser {
         this.email = email;
     }
 
-    public String getCompany() {
-        return Company;
-    }
-
-    public void setCompany(String company) {
-        Company = company;
-    }
-
     public String getPhone() {
         return phone;
     }
@@ -81,29 +60,5 @@ public class CompanyUser {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
-    }
-
-    public Department getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
     }
 }

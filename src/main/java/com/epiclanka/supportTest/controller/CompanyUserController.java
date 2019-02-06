@@ -1,9 +1,9 @@
 package com.epiclanka.supportTest.controller;
 
+import com.epiclanka.supportTest.model.CompanyUser;
 import com.epiclanka.supportTest.model.Department;
-import com.epiclanka.supportTest.model.Team;
+import com.epiclanka.supportTest.repository.CompanyUserRepository;
 import com.epiclanka.supportTest.repository.DepartmentRepository;
-import com.epiclanka.supportTest.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,18 +12,18 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/admin/team")
-public class TeamController {
+@RequestMapping(value = "api/admin/companyUser")
+public class CompanyUserController {
     @Autowired
-    private TeamRepository teamRepository;
+    private CompanyUserRepository companyUserRepository;
 
     @RequestMapping("/save")
-    public Team save(@RequestBody Team team){
-        return teamRepository.save(team);
+    public CompanyUser save(@RequestBody CompanyUser companyUser){
+        return companyUserRepository.save(companyUser);
     }
 
     @RequestMapping("/findAll")
-    public List<Team> findAll(){
-        return  teamRepository.findAll();
+    public List<CompanyUser> findAll(){
+        return  companyUserRepository.findAll();
     }
 }
