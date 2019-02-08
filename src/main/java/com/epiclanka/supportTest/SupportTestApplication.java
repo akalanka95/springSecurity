@@ -1,13 +1,9 @@
 package com.epiclanka.supportTest;
 
-import com.epiclanka.supportTest.model.Company;
-import com.epiclanka.supportTest.model.Department;
-import com.epiclanka.supportTest.model.Module;
-import com.epiclanka.supportTest.model.Product;
-import com.epiclanka.supportTest.repository.CompanyRepository;
-import com.epiclanka.supportTest.repository.DepartmentRepository;
-import com.epiclanka.supportTest.repository.ModuleRepository;
-import com.epiclanka.supportTest.repository.ProductRepository;
+import com.epiclanka.supportTest.model.*;
+import com.epiclanka.supportTest.repository.*;
+import com.epiclanka.supportTest.service.CompanyService;
+import com.epiclanka.supportTest.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -18,6 +14,9 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @SpringBootApplication
 public class SupportTestApplication  implements CommandLineRunner {
@@ -30,6 +29,12 @@ public class SupportTestApplication  implements CommandLineRunner {
 	private CompanyRepository companyRepository;
 	@Autowired
 	private ModuleRepository moduleRepository;
+	@Autowired
+	private ProductService productService;
+	@Autowired
+	private ProductModuleRepository productModuleRepository;
+	@Autowired
+	private CompanyService companyService;
 
 
 	public static void main(String[] args) {
@@ -62,7 +67,6 @@ public class SupportTestApplication  implements CommandLineRunner {
 		Department d2 = new Department();
 		d2.setDepartmentName("Development");
 		departmentRepository.save(d2);
-
 
 		//Products
 		Product p1 = new Product();
@@ -105,30 +109,34 @@ public class SupportTestApplication  implements CommandLineRunner {
 		p8.setType("SOFTWARE");
 		//productRepository.save(p8);
 
+		//productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5,p6,p7,p8));
+
 		//Clients
 		Company c1 = new Company();
 		c1.setCompanyName("NSB");
-		companyRepository.save(c1);
+		//companyRepository.save(c1);
 
 		Company c2 = new Company();
 		c2.setCompanyName("NTB");
-		companyRepository.save(c1);
+		//companyRepository.save(c1);
 
 		Company c3 = new Company();
 		c3.setCompanyName("RDB");
-		companyRepository.save(c3);
+		//companyRepository.save(c3);
 
 		Company c4 = new Company();
 		c4.setCompanyName("Com Credit");
-		companyRepository.save(c4);
+		//companyRepository.save(c4);
 
 		Company c5 = new Company();
 		c5.setCompanyName("PLC");
-		companyRepository.save(c5);
+		//companyRepository.save(c5);
 
 		Company c6 = new Company();
 		c6.setCompanyName("BIMPUTH");
-		companyRepository.save(c6);
+		//companyRepository.save(c6);
+
+		//companyRepository.saveAll(Arrays.asList(c1,c2,c3,c4,c5,c6));
 
 		//Module
 		Module m1 = new Module();
@@ -165,15 +173,23 @@ public class SupportTestApplication  implements CommandLineRunner {
 		m7.setModuleName("WAM");
 		m7.setType("SOFTWARE");
 		//moduleRepository.save(m7);
+		//moduleRepository.saveAll(Arrays.asList(m1,m2,m3,m4,m5,m6,m7));
 
-//		p1.getModules().add(m1);
-//		p1.getModules().add(m2);
-//
-//		productRepository.save(p1);
+		Set<Product_Module> productModule = new HashSet<>();
+		productModule.add(new Product_Module(p1,m1));
+		productModule.add(new Product_Module(p1,m2));
+		productModule.add(new Product_Module(p1,m3));
+		companyService.createCompany(c1, productModule , p1);
+		//productModule.add(new Product_Module(p1,m4));
+		//productModule.add(new Product_Module(p1,m5));
+		//productService.createProduct(p1, productModule);
 
-		moduleRepository.saveAll(Arrays.asList(m1,m2,m3,m4,m5,m6,m7));
-
-
+		//Set<Company_Product_Module> company_product_modules = new HashSet<>();
+		//Optional<Product_Module> pm = productModuleRepository.findById(11L);
+		//System.out.println("this is product module");
+		//System.out.println(pm.get());
+		//company_product_modules.add(new Company_Product_Module(c1 ));
+		//companyService.createCompany(c1,company_product_modules , productModule , p1);
 
 	}
 }

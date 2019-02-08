@@ -26,11 +26,11 @@ public class Module {
     private Set<Product_Module> productModules = new HashSet<>();
 
 
-    public Module(String moduleName, String type, Set<Product_Module> productModules) {
-        this.moduleName = moduleName;
-        this.type = type;
-        this.productModules = productModules;
-    }
+//    public Module(String moduleName, String type, Set<Product_Module> productModules) {
+//        this.moduleName = moduleName;
+//        this.type = type;
+//        this.productModules = productModules;
+//    }
 
     public Set<Product_Module> getProductModules() {
         return productModules;

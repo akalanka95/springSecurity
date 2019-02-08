@@ -15,26 +15,9 @@ public class Product {
     private String productName;
     private String type;
 
-
-//    @ManyToMany(fetch = FetchType.LAZY,
-//            cascade = {
-//                    CascadeType.PERSIST,
-//                    CascadeType.MERGE
-//            })
-//    @JoinTable(name = "product_module",
-//            joinColumns = { @JoinColumn(name = "product_id") },
-//            inverseJoinColumns = { @JoinColumn(name = "module_id") })
-//    private Set<Module> modules = new HashSet<>();
-
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private Set<Product_Module> productModules;
+    private Set<Product_Module> productModules = new HashSet<>();
 
-
-    public Product(String productName, String type, Set<Product_Module> productModules) {
-        this.productName = productName;
-        this.type = type;
-        this.productModules = productModules;
-    }
 
     public Set<Product_Module> getProductModules() {
         return productModules;
